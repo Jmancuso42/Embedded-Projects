@@ -1,0 +1,216 @@
+
+GccApplication2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000172  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000011e  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000172  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001a4  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  000001e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000081a  00000000  00000000  00000204  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000066f  00000000  00000000  00000a1e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000033c  00000000  00000000  0000108d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000024  00000000  00000000  000013cc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003a0  00000000  00000000  000013f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000001b0  00000000  00000000  00001790  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  00001940  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
+  78:	0c 94 8d 00 	jmp	0x11a	; 0x11a <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <main>:
+#include <util/delay.h>
+
+
+int main(void)
+{	//set ddr
+	DDRB = 0b00000111;
+  80:	87 e0       	ldi	r24, 0x07	; 7
+  82:	84 b9       	out	0x04, r24	; 4
+	DDRD = 0b11100000;
+  84:	80 ee       	ldi	r24, 0xE0	; 224
+  86:	8a b9       	out	0x0a, r24	; 10
+	//8 should be on when 5 is on
+	///* Replace with your application code */
+	while (1)
+	{
+		
+		PORTB = (1 << 2);   //turn on close red
+  88:	84 e0       	ldi	r24, 0x04	; 4
+		PORTD = (1 << 5); //turn on far green
+  8a:	20 e2       	ldi	r18, 0x20	; 32
+		_delay_ms(2000);
+		PORTD = (1 << 6); //far yellow
+  8c:	50 e4       	ldi	r21, 0x40	; 64
+		PORTB = (1<< 2); // Close red 
+		_delay_ms(2000);
+		PORTD = (1<<7); // far red 
+  8e:	90 e8       	ldi	r25, 0x80	; 128
+		PORTB = (1 << 2);  //keep on red close
+		//PORTB = (1 << 1);  //turn on the close yellow
+			_delay_ms(1000);
+		PORTB = (1<<0); //close green 
+  90:	41 e0       	ldi	r20, 0x01	; 1
+		PORTD = (1<<7); //far red 
+	
+		_delay_ms(2000);
+		PORTB = (1<<1); // close yellow
+  92:	32 e0       	ldi	r19, 0x02	; 2
+	//8 should be on when 5 is on
+	///* Replace with your application code */
+	while (1)
+	{
+		
+		PORTB = (1 << 2);   //turn on close red
+  94:	85 b9       	out	0x05, r24	; 5
+		PORTD = (1 << 5); //turn on far green
+  96:	2b b9       	out	0x0b, r18	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  98:	6f ef       	ldi	r22, 0xFF	; 255
+  9a:	77 ea       	ldi	r23, 0xA7	; 167
+  9c:	e1 e6       	ldi	r30, 0x61	; 97
+  9e:	61 50       	subi	r22, 0x01	; 1
+  a0:	70 40       	sbci	r23, 0x00	; 0
+  a2:	e0 40       	sbci	r30, 0x00	; 0
+  a4:	e1 f7       	brne	.-8      	; 0x9e <main+0x1e>
+  a6:	00 c0       	rjmp	.+0      	; 0xa8 <main+0x28>
+  a8:	00 00       	nop
+		_delay_ms(2000);
+		PORTD = (1 << 6); //far yellow
+  aa:	5b b9       	out	0x0b, r21	; 11
+		PORTB = (1<< 2); // Close red 
+  ac:	85 b9       	out	0x05, r24	; 5
+  ae:	6f ef       	ldi	r22, 0xFF	; 255
+  b0:	77 ea       	ldi	r23, 0xA7	; 167
+  b2:	e1 e6       	ldi	r30, 0x61	; 97
+  b4:	61 50       	subi	r22, 0x01	; 1
+  b6:	70 40       	sbci	r23, 0x00	; 0
+  b8:	e0 40       	sbci	r30, 0x00	; 0
+  ba:	e1 f7       	brne	.-8      	; 0xb4 <main+0x34>
+  bc:	00 c0       	rjmp	.+0      	; 0xbe <main+0x3e>
+  be:	00 00       	nop
+		_delay_ms(2000);
+		PORTD = (1<<7); // far red 
+  c0:	9b b9       	out	0x0b, r25	; 11
+		PORTB = (1 << 2);  //keep on red close
+  c2:	85 b9       	out	0x05, r24	; 5
+  c4:	6f ef       	ldi	r22, 0xFF	; 255
+  c6:	73 ed       	ldi	r23, 0xD3	; 211
+  c8:	e0 e3       	ldi	r30, 0x30	; 48
+  ca:	61 50       	subi	r22, 0x01	; 1
+  cc:	70 40       	sbci	r23, 0x00	; 0
+  ce:	e0 40       	sbci	r30, 0x00	; 0
+  d0:	e1 f7       	brne	.-8      	; 0xca <main+0x4a>
+  d2:	00 c0       	rjmp	.+0      	; 0xd4 <main+0x54>
+  d4:	00 00       	nop
+		//PORTB = (1 << 1);  //turn on the close yellow
+			_delay_ms(1000);
+		PORTB = (1<<0); //close green 
+  d6:	45 b9       	out	0x05, r20	; 5
+		PORTD = (1<<7); //far red 
+  d8:	9b b9       	out	0x0b, r25	; 11
+  da:	6f ef       	ldi	r22, 0xFF	; 255
+  dc:	77 ea       	ldi	r23, 0xA7	; 167
+  de:	e1 e6       	ldi	r30, 0x61	; 97
+  e0:	61 50       	subi	r22, 0x01	; 1
+  e2:	70 40       	sbci	r23, 0x00	; 0
+  e4:	e0 40       	sbci	r30, 0x00	; 0
+  e6:	e1 f7       	brne	.-8      	; 0xe0 <main+0x60>
+  e8:	00 c0       	rjmp	.+0      	; 0xea <main+0x6a>
+  ea:	00 00       	nop
+	
+		_delay_ms(2000);
+		PORTB = (1<<1); // close yellow
+  ec:	35 b9       	out	0x05, r19	; 5
+  ee:	6f ef       	ldi	r22, 0xFF	; 255
+  f0:	7d e3       	ldi	r23, 0x3D	; 61
+  f2:	e9 e4       	ldi	r30, 0x49	; 73
+  f4:	61 50       	subi	r22, 0x01	; 1
+  f6:	70 40       	sbci	r23, 0x00	; 0
+  f8:	e0 40       	sbci	r30, 0x00	; 0
+  fa:	e1 f7       	brne	.-8      	; 0xf4 <main+0x74>
+  fc:	00 c0       	rjmp	.+0      	; 0xfe <main+0x7e>
+  fe:	00 00       	nop
+
+		_delay_ms(1500);
+		PORTB = (1<<2); // close red
+ 100:	85 b9       	out	0x05, r24	; 5
+		PORTD = (1<<7); //far red 
+ 102:	9b b9       	out	0x0b, r25	; 11
+ 104:	6f ef       	ldi	r22, 0xFF	; 255
+ 106:	79 e8       	ldi	r23, 0x89	; 137
+ 108:	e6 e6       	ldi	r30, 0x66	; 102
+ 10a:	61 50       	subi	r22, 0x01	; 1
+ 10c:	70 40       	sbci	r23, 0x00	; 0
+ 10e:	e0 40       	sbci	r30, 0x00	; 0
+ 110:	e1 f7       	brne	.-8      	; 0x10a <main+0x8a>
+ 112:	00 c0       	rjmp	.+0      	; 0x114 <main+0x94>
+ 114:	00 00       	nop
+		_delay_ms(2100);
+		PORTD = (1<<5); // far green
+ 116:	2b b9       	out	0x0b, r18	; 11
+ 118:	bd cf       	rjmp	.-134    	; 0x94 <main+0x14>
+
+0000011a <_exit>:
+ 11a:	f8 94       	cli
+
+0000011c <__stop_program>:
+ 11c:	ff cf       	rjmp	.-2      	; 0x11c <__stop_program>
